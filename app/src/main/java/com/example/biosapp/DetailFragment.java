@@ -22,17 +22,15 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment, container, false);
-        _image = view.findViewById(R.id.listview_image);
-        _title = view.findViewById(R.id.listview_item_title);
-        _desc = view.findViewById(R.id.listview_item_short_description);
-        _rating = view.findViewById(R.id.ratingBar);
+        _title = view.findViewById(R.id.detail_title);
+        _desc = view.findViewById(R.id.detail_description);
+        _rating = view.findViewById(R.id.detail_ratingBar);
         return view;
     }
 
     public void setMovie(Movie item){
-        _image.setImageResource(item.picture);
         _title.setText(item.name);
         _desc.setText(item.description);
-        _rating.setNumStars(item.rating);
+        _rating.setRating(item.rating);
     }
 }

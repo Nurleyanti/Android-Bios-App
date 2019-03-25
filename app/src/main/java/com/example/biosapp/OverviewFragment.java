@@ -24,7 +24,7 @@ public class OverviewFragment extends Fragment{
 
         Movie corgi = new Movie("Corgi", R.drawable.corgi, 4, "Corgi Rex is de meest geliefde hond van het Britse koningshuis en ondanks dat hij zich niet altijd aan de regels houdt is hij lievelingetje van de Koningin.");
         Movie marvel = new Movie("Captain Marvel", R.drawable.marvel, 4, "Marvel Studios’ Captain Marve is een compleet nieuw avontuur dat zich afspeelt in 1990, een tot nu toe verborgen periode uit de geschiedenis van het Marvel Cinematic Universe.");
-        Movie us = new Movie("Us", R.drawable.us, 3, "De innovatieve filmmaker en Oscarwinnaar Jordan Peele (Get Out) komt opnieuw met een originele en controversiële thriller: Us.");
+        Movie us = new Movie("Us", R.drawable.us, 3.5f, "De innovatieve filmmaker en Oscarwinnaar Jordan Peele (Get Out) komt opnieuw met een originele en controversiële thriller: Us.");
 
         movieArray = new Movie[]{corgi, marvel, us};
 
