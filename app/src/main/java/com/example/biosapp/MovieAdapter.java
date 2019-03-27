@@ -74,7 +74,6 @@ public class MovieAdapter extends BaseAdapter {
         Movie movie = movies.get(position);
         imageView.setImageURI(movie.getPicture());
         title.setText(movie.getTitle());
-        Log.d("FILMTITEL", movie.getTitle());
         desc.setText(movie.getDescription());
         rating.setRating(movie.getRating());
 
