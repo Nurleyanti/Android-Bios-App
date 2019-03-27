@@ -2,6 +2,9 @@ package com.example.biosapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,10 +16,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +41,7 @@ public class MovieAdapter extends BaseAdapter {
         this.context = context;
         this.movies = movies;
     }
+
 
     @Override
     public int getCount() {
@@ -72,7 +78,9 @@ public class MovieAdapter extends BaseAdapter {
 
 
         Movie movie = movies.get(position);
-        imageView.setImageURI(movie.getPicture());
+        new MainActivity.DownloadImageFromInternet((ImageView) convertView.findViewById(R.id.listview_image))
+                .execute(movie.getPicture());
+        //imageView.setImageBitmap(movie.getPicture());
         title.setText(movie.getTitle());
         desc.setText(movie.getDescription());
         rating.setRating(movie.getRating());
@@ -124,4 +132,9 @@ public class MovieAdapter extends BaseAdapter {
 //
 //        return convertView;
 //    }
+
+
+
+
+
 }

@@ -1,17 +1,18 @@
 package com.example.biosapp;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 public class Movie {
     public String title;
-    public Uri picture;
+    public String picture;
     public float rating;
     public String description;
 
     public Movie() {
     }
 
-    public Movie(String title, Uri picture, float rating, String description){
+    public Movie(String title, String picture, float rating, String description){
      this.title = title;
      this.picture = picture;
      this.rating = rating;
@@ -34,11 +35,11 @@ public class Movie {
         this.description = description;
     }
 
-    public Uri getPicture(){
+    public String getPicture(){
         return picture;
     }
 
-    public void setPicture(Uri picture){
+    public void setPicture(String picture){
         this.picture = picture;
     }
 
