@@ -29,7 +29,7 @@ public class DetailFragment extends Fragment {
     }
 
     public void setMovie(Movie item){
-        _title.setText(item.name);
+        _title.setText(item.title);
         _desc.setText(item.description);
         _rating.setRating(item.rating);
     }
