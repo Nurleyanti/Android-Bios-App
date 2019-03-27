@@ -8,9 +8,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Adapter;
 
 import android.widget.ImageView;
@@ -45,90 +49,33 @@ public class MainActivity extends AppCompatActivity implements OverviewFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+    BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
+bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        dialog = new ProgressDialog(this);
-        dialog.setMessage("Loading...");
-        dialog.show();
-
-//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                Log.d(TAG, response.toString());
-//            hideDialog();
-//            for(int i=0; i< response.length(); i++){
-//                try{
-//                    JSONObject obj = response.getJSONObject(i);
-//                    Movie movie = new Movie();
-//                    movie.setTitle(obj.getString("title"));
-//                    movie.setDescription(obj.getString("overview"));
-//                    movie.setPicture( Uri.parse(obj.getString("image")));
-//                    movie.setRating( (float) obj.getDouble("vote_average")/2);
-//                    Log.d("FILM", movie.getTitle());
-//                    array.add(movie);
-//                }catch(JSONException ex){
-//                    ex.printStackTrace();
-//                }
-//            }
-//            adapter.notifyDataSetChanged();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                hideDialog();
-//            }
-//        });
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-
-                hideDialog();
-                try {
-
-                    JSONArray jsonArray = response.getJSONArray("results");
-
-                    for(int i=0; i< jsonArray.length(); i++){
-                        Log.d("FILM", "Nurleyanti");
-                        JSONObject obj = jsonArray.getJSONObject(i);
-
-                        //String title = obj.getString("title");
-                        Movie movie = new Movie();
-                    movie.setTitle(obj.getString("title"));
-                    movie.setDescription(obj.getString("overview"));
-                    movie.setPicture( "http://image.tmdb.org/t/p/w185/" +obj.getString("poster_path"));
-
-                    movie.setRating( (float) obj.getDouble("vote_average")/2);
-                    array.add(movie);
-                    Log.d("FILM", movie.getTitle());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }adapter.notifyDataSetChanged();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-
-        listView = findViewById(R.id.list_view);
-        adapter = new MovieAdapter(listView.getContext(), array);
-        listView.setAdapter(adapter);
-
-        AppController.getmInstance().addToRequestQueue(request);
-
-//        final MovieAdapter adapter = new MovieAdapter(this, R.layout.listview_activity);
-//        adapter.add(new Movie("Corgi", R.drawable.corgi, 4, "Corgi Rex is de meest geliefde hond van het Britse koningshuis en ondanks dat hij zich niet altijd aan de regels houdt is hij lievelingetje van de Koningin."));
-//        adapter.add(new Movie("Captain Marvel", R.drawable.marvel, 4, "Marvel Studios’ Captain Marve is een compleet nieuw avontuur dat zich afspeelt in 1990, een tot nu toe verborgen periode uit de geschiedenis van het Marvel Cinematic Universe."));
-//        adapter.add(new Movie("Us", R.drawable.us, 3.5, "De innovatieve filmmaker en Oscarwinnaar Jordan Peele (Get Out) komt opnieuw met een originele en controversiële thriller: Us."));
-//        ListView listView = findViewById(R.id.list_view);
-//        listView.setAdapter(adapter);
+getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+        new OverviewFragment()).commit();
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    Fragment selectedFragment = null;
+
+                    switch(menuItem.getItemId()){
+                        case R.id.nav_home:
+                            selectedFragment = new OverviewFragment();
+                            break;
+                        case R.id.nav_list:
+                            selectedFragment = new MylistFragment();
+                            break;
+                        case R.id.nav_profile:
+                            selectedFragment = new ProfileFragment();
+                            break;
+                    }getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                return true;
+                }
+            };
     @Override
     public void onDestroy() {
         super.onDestroy();

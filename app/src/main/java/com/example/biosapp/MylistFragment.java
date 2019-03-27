@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -25,14 +23,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OverviewFragment extends Fragment{
+public class MylistFragment extends Fragment{
 
     private static final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=b6df984eba8e46d43326f404be37161a&language=en-US&page=1";
     private ProgressDialog dialog;
     private ListView listView;
     private List<Movie> array = new ArrayList<Movie>();
     private MovieAdapter adapter;
-    private static final String TAG = MainActivity.class.getSimpleName();
 
 
 
@@ -42,49 +39,9 @@ public class OverviewFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
 
-        View view = inflater.inflate(R.layout.overview_fragment, container, false);
-        dialog = new ProgressDialog(this.getContext());
-        dialog.setMessage("Loading...");
-        dialog.show();
+        View view = inflater.inflate(R.layout.mylist_fragment, container, false);
+        //listView = view.findViewById(R.id.list);
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                hideDialog();
-                try {
-
-                    JSONArray jsonArray = response.getJSONArray("results");
-
-                    for(int i=0; i< jsonArray.length(); i++){
-                        Log.d("FILM", "Nurleyanti");
-                        JSONObject obj = jsonArray.getJSONObject(i);
-                        Movie movie = new Movie();
-                        movie.setTitle(obj.getString("title"));
-                        movie.setDescription(obj.getString("overview"));
-                        movie.setPicture( "http://image.tmdb.org/t/p/w185/" +obj.getString("poster_path"));
-
-                        movie.setRating( (float) obj.getDouble("vote_average")/2);
-                        array.add(movie);
-                        Log.d("FILM", movie.getTitle());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }adapter.notifyDataSetChanged();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-
-        listView = view.findViewById(R.id.list);
-        adapter = new MovieAdapter(listView.getContext(), array);
-        listView.setAdapter(adapter);
-
-        AppController.getmInstance().addToRequestQueue(request);
         return view;
     }
 
