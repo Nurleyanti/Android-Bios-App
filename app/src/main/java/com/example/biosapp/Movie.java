@@ -2,8 +2,10 @@ package com.example.biosapp;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Movie {
+public class Movie implements Parcelable {
     public String title;
     public String picture;
     public float rating;
@@ -18,6 +20,25 @@ public class Movie {
      this.rating = rating;
      this.description = description;
     }
+
+    protected Movie(Parcel in) {
+        title = in.readString();
+        picture = in.readString();
+        rating = in.readFloat();
+        description = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
     public String getTitle(){
         return title;
@@ -52,5 +73,16 @@ public class Movie {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(picture);
+        dest.writeFloat(rating);
+        dest.writeString(description);
+    }
 }

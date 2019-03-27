@@ -1,6 +1,7 @@
 package com.example.biosapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class OverviewFragment extends Fragment{
     private List<Movie> array = new ArrayList<Movie>();
     private MovieAdapter adapter;
     private static final String TAG = MainActivity.class.getSimpleName();
+    Movie movie;
 
 
 
@@ -40,8 +43,6 @@ public class OverviewFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         View view = inflater.inflate(R.layout.overview_fragment, container, false);
         dialog = new ProgressDialog(this.getContext());
         dialog.setMessage("Loading...");
@@ -56,9 +57,8 @@ public class OverviewFragment extends Fragment{
                     JSONArray jsonArray = response.getJSONArray("results");
 
                     for(int i=0; i< jsonArray.length(); i++){
-                        Log.d("FILM", "Nurleyanti");
                         JSONObject obj = jsonArray.getJSONObject(i);
-                        Movie movie = new Movie();
+                        movie = new Movie();
                         movie.setTitle(obj.getString("title"));
                         movie.setDescription(obj.getString("overview"));
                         movie.setPicture( "http://image.tmdb.org/t/p/w185/" +obj.getString("poster_path"));
@@ -84,9 +84,22 @@ public class OverviewFragment extends Fragment{
         adapter = new MovieAdapter(listView.getContext(), array);
         listView.setAdapter(adapter);
 
+        //listView.setOnItemClickListener();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(view.getContext(), DetailActivity.class);
+                i.putExtra("MOVIE!", array.get(position));
+                startActivity(i);
+            }
+        });
+
         AppController.getmInstance().addToRequestQueue(request);
         return view;
     }
+
+
 
     public interface OnItemSelectedListener {
         void onItemSelected(Movie item);
