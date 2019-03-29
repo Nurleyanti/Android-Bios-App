@@ -4,10 +4,12 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -26,12 +28,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -67,6 +72,13 @@ getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             selectedFragment = new OverviewFragment();
                             break;
                         case R.id.nav_list:
+//                            Intent intent = getIntent();
+//                            List<Movie> movies = intent.getParcelableArrayListExtra("MOVIES");
+//                            Bundle bundle = new Bundle();
+//                            bundle.putParcelableArrayList("MOVIES!", (ArrayList) movies);
+                            //MylistFragment mylistFragment = new MylistFragment();
+                            //mylistFragment.setArguments(bundle);
+
                             selectedFragment = new MylistFragment();
                             break;
                         case R.id.nav_profile:
@@ -88,6 +100,8 @@ getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
             dialog = null;
         }
     }
+
+
 
 
 

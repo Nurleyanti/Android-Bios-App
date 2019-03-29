@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class MovieAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context context;
     private List<Movie> movies;
+    String message;
     ImageLoader imageLoader = AppController.getmInstance().getmImageLoader();
 
 //    public MovieAdapter(Activity activity, List<Movie> movies){
@@ -75,7 +77,7 @@ public class MovieAdapter extends BaseAdapter {
             TextView title = (TextView) convertView.findViewById((R.id.listview_item_title));
             TextView desc = (TextView) convertView.findViewById(R.id.listview_item_short_description);
             RatingBar rating = (RatingBar) convertView.findViewById(R.id.detail_ratingBar);
-
+        Button button = convertView.findViewById(R.id.bt);
 
         Movie movie = movies.get(position);
         new MainActivity.DownloadImageFromInternet((ImageView) convertView.findViewById(R.id.listview_image))
@@ -85,8 +87,28 @@ public class MovieAdapter extends BaseAdapter {
         desc.setText(movie.getDescription().substring(0, 90)+"...");
         rating.setRating(movie.getRating());
 
+
+        if(!movie.getInMylist()){
+            button.setBackgroundResource(R.drawable.ic_add_black_24dp);
+            message =  "Toegevoegd aan Mijn Lijst";
+        }else{
+            button.setBackgroundResource(R.drawable.ic_remove_black_24dp);
+            message =  "Verwijderd uit Mijn Lijst";
+        }
+
+        button.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                toastMsg(message);
+            }
+        });
+
         //}
         return convertView;
+
+
 
 
 
@@ -113,7 +135,12 @@ public class MovieAdapter extends BaseAdapter {
 //        }
 //        return convertView;
     }
+    public void toastMsg(String msg) {
 
+        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
+        toast.show();
+
+    }
 //    @Override
 //    public View getView(int position, View convertView, ViewGroup parent) {
 //        if (convertView == null) {

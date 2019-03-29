@@ -19,7 +19,6 @@ public class ProfileFragment extends Fragment{
     private ProgressDialog dialog;
     private ListView listView;
     private List<Movie> array = new ArrayList<Movie>();
-    private MovieAdapter adapter;
 
 
 
