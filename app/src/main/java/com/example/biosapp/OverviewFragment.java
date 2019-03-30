@@ -101,7 +101,7 @@ public class OverviewFragment extends Fragment{
                         movie.setTitle(obj.getString("title"));
                         movie.setDescription(obj.getString("overview"));
                         movie.setPicture( "http://image.tmdb.org/t/p/w185/" +obj.getString("poster_path"));
-
+                        movie.inMyList = true;
                         movie.setRating( (float) obj.getDouble("vote_average")/2);
 
                         array.add(movie);

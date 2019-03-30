@@ -72,12 +72,6 @@ getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             selectedFragment = new OverviewFragment();
                             break;
                         case R.id.nav_list:
-//                            Intent intent = getIntent();
-//                            List<Movie> movies = intent.getParcelableArrayListExtra("MOVIES");
-//                            Bundle bundle = new Bundle();
-//                            bundle.putParcelableArrayList("MOVIES!", (ArrayList) movies);
-                            //MylistFragment mylistFragment = new MylistFragment();
-                            //mylistFragment.setArguments(bundle);
 
                             selectedFragment = new MylistFragment();
                             break;

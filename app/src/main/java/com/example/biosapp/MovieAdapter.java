@@ -32,6 +32,7 @@ public class MovieAdapter extends BaseAdapter {
     private Context context;
     private List<Movie> movies;
     String message;
+    Button button;
     ImageLoader imageLoader = AppController.getmInstance().getmImageLoader();
 
 //    public MovieAdapter(Activity activity, List<Movie> movies){
@@ -77,9 +78,9 @@ public class MovieAdapter extends BaseAdapter {
             TextView title = (TextView) convertView.findViewById((R.id.listview_item_title));
             TextView desc = (TextView) convertView.findViewById(R.id.listview_item_short_description);
             RatingBar rating = (RatingBar) convertView.findViewById(R.id.detail_ratingBar);
-        Button button = convertView.findViewById(R.id.bt);
+        button = convertView.findViewById(R.id.bt);
 
-        Movie movie = movies.get(position);
+        final Movie movie = movies.get(position);
         new MainActivity.DownloadImageFromInternet((ImageView) convertView.findViewById(R.id.listview_image))
                 .execute(movie.getPicture());
         //imageView.setImageBitmap(movie.getPicture());
@@ -100,7 +101,15 @@ public class MovieAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
+                if(!movie.getInMylist()){
+                    movie.inMyList = false;
+                    v.setBackgroundResource(R.drawable.ic_remove_black_24dp);
+                }else{
+                    movie.inMyList = true;
+                    v.setBackgroundResource(R.drawable.ic_add_black_24dp);
 
+                }
+                //!movie.getInMylist() = movie.getInMylist();
                 toastMsg(message);
             }
         });
@@ -137,7 +146,7 @@ public class MovieAdapter extends BaseAdapter {
     }
     public void toastMsg(String msg) {
 
-        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
         toast.show();
 
     }

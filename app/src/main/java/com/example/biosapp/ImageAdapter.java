@@ -7,23 +7,25 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class ImageAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Bitmap> bitmapList;
+    //private ArrayList<Bitmap> bitmapList;
     private ArrayList<String> urlList;
 
-    public ImageAdapter(Context context, ArrayList<Bitmap> bitmapList, ArrayList<String> urlList) {
+    public ImageAdapter(Context context, ArrayList<String> urlList) {
         this.context = context;
-        this.bitmapList = bitmapList;
         this.urlList = urlList;
     }
 
     @Override
     public int getCount() {
-        return bitmapList.size();
+        return urlList.size();
     }
 
     @Override
@@ -40,18 +42,20 @@ public class ImageAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if (convertView == null) {
-            for(int i = 0;i < urlList.size(); i++){
-                new MainActivity.DownloadImageFromInternet(new ImageView(this.context))
-                        .execute(urlList.get(i));
+
                 imageView = new ImageView(this.context);
                 imageView.setLayoutParams(new GridView.LayoutParams(115, 115));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            }
+
+
 
         } else {
             imageView = (ImageView) convertView;
         }
-
+        for(int i = 0;i < urlList.size(); i++) {
+            new MainActivity.DownloadImageFromInternet(imageView)
+                    .execute(urlList.get(i));
+        }
         //imageView.setImageBitmap(this.bitmapList.get(position));
         return imageView;
 

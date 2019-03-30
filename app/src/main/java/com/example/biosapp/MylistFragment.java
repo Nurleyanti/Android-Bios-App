@@ -58,13 +58,16 @@ public class MylistFragment extends Fragment{
         this.urlList = new ArrayList<String>();
         try {
             for(int i = 0; i < array.size(); i++) {
-                this.urlList.add(array.get(i).getPicture());
+                if(array.get(i).inMyList){
+                    this.urlList.add(array.get(i).getPicture());
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        imageGrid.setAdapter(new ImageAdapter(view.getContext(), this.bitmapList, this.urlList));
+        imageGrid.setAdapter(new ImageAdapter(view.getContext(), this.urlList));
 
         return view;
     }
