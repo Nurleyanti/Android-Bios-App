@@ -2,9 +2,11 @@ package com.example.biosapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +23,11 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,26 +94,44 @@ public class MovieAdapter extends BaseAdapter {
         rating.setRating(movie.getRating());
 
 
-        if(!movie.getInMylist()){
+        if(movie.getInMylist() == false){
             button.setBackgroundResource(R.drawable.ic_add_black_24dp);
-            message =  "Toegevoegd aan Mijn Lijst";
+
         }else{
             button.setBackgroundResource(R.drawable.ic_remove_black_24dp);
-            message =  "Verwijderd uit Mijn Lijst";
+
         }
 
         button.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(!movie.getInMylist()){
-                    movie.inMyList = false;
+                if(movie.getInMylist() == true){
+                    message =  "Verwijderd uit Mijn Lijst";
                     v.setBackgroundResource(R.drawable.ic_remove_black_24dp);
+                    for(int i = 0; i < movies.size(); i++){
+                        if (movies.get(i).id == movie.id){
+                            movies.get(i).setInMylist(false);
+                        }
+                    }
+                    saveData((ArrayList)movies);
+                    movies = loadData();
+
                 }else{
-                    movie.inMyList = true;
+                    message =  "Toegevoegd aan Mijn Lijst";
                     v.setBackgroundResource(R.drawable.ic_add_black_24dp);
+                    for(int i = 0; i < movies.size(); i++){
+                        if (movies.get(i).id == movie.id){
+                            movies.get(i).setInMylist(true);
+                        }
+                    }
+                    saveData((ArrayList)movies);
+                    movies = loadData();
+
 
                 }
+//                    saveData((ArrayList)movies);
+                    movies = loadData();
                 //!movie.getInMylist() = movie.getInMylist();
                 toastMsg(message);
             }
@@ -117,57 +140,40 @@ public class MovieAdapter extends BaseAdapter {
         //}
         return convertView;
 
-
-
-
-
-        /////
-//        if (convertView == null) {
-//            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            convertView = inflater.inflate(R.layout.listview_activity, parent, false);
-//        }
-//        Movie movie = movies.get(position);
-//
-//        ImageView imageview = convertView.findViewById(R.id.listview_image);
-//
-//        TextView title = convertView.findViewById(R.id.listview_item_title);
-//
-//        TextView desc = convertView.findViewById(R.id.listview_item_short_description);
-//
-//        if(movie!= null){
-//            imageview.setImageURI(movie.picture);
-//            title.setText(movie.title);
-//            desc.setText(movie.description);
-//
-//        }else{
-//            title.setText("Movie not found");
-//        }
-//        return convertView;
     }
+
     public void toastMsg(String msg) {
 
         Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
         toast.show();
 
     }
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        if (convertView == null) {
-//            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            convertView = inflater.inflate(R.layout.listview_activity, parent, false);
-//        }
-//        Movie movie = (Movie) getItem(position);
-//        ImageView imageview = convertView.findViewById(R.id.listview_image);
-//        imageview.setImageResource(movie.picture);
-//
-//        TextView textTitle = convertView.findViewById(R.id.listview_item_title);
-//        textTitle.setText(movie.name);
-//
-//        TextView textDesc = convertView.findViewById(R.id.listview_item_short_description);
-//        textDesc.setText(movie.description);
-//
-//        return convertView;
-//    }
+
+    public void saveData(ArrayList<Movie> movies){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(movies);
+        editor.putString("moviess", json);
+        editor.apply();     // This line is IMPORTANT !!
+    }
+
+    public ArrayList<Movie> loadData(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Gson gson = new Gson();
+        String json = prefs.getString("moviess", null);
+        Type type = new TypeToken<ArrayList<Movie>>() {}.getType();
+        return gson.fromJson(json, type);
+    }
+
+    public ArrayList<Movie> getArrayList(String key){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Gson gson = new Gson();
+        String json = prefs.getString(key, null);
+        Type type = new TypeToken<ArrayList<Movie>>() {}.getType();
+        return gson.fromJson(json, type);
+    }
+
 
 
 

@@ -22,12 +22,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +57,14 @@ public class OverviewFragment extends Fragment{
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.overview_fragment, container, false);
             profile = new Profile();
-            if(profile.getMyMovies() == null){
-                doJsonRequest();
-            }
+//            if(profile.getMyMovies() == null){
+//                doJsonRequest();
+//            }
+        if(loadData("moviess") == null){
+            doJsonRequest();
+        }else{
+            array = loadData("moviess");
+        }
 
 
 
@@ -67,15 +74,15 @@ public class OverviewFragment extends Fragment{
 
 
         //pass movie data to detail activity
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(view.getContext(), DetailActivity.class);
-                i.putExtra("MOVIE!", array.get(position));
-
-                startActivity(i);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent i = new Intent(view.getContext(), DetailActivity.class);
+//                i.putExtra("MOVIE!", array.get(position));
+//
+//                startActivity(i);
+//            }
+//        });
 
 
         return view;
@@ -101,7 +108,7 @@ public class OverviewFragment extends Fragment{
                         movie.setTitle(obj.getString("title"));
                         movie.setDescription(obj.getString("overview"));
                         movie.setPicture( "http://image.tmdb.org/t/p/w185/" +obj.getString("poster_path"));
-                        movie.inMyList = true;
+                        //movie.inMyList = true;
                         movie.setRating( (float) obj.getDouble("vote_average")/2);
 
                         array.add(movie);
@@ -112,15 +119,8 @@ public class OverviewFragment extends Fragment{
                         Log.d("FILM", movie.getTitle());
                     }
                     profile.setNewMovies( array);
-                    //Intent intent = new Intent(getActivity().getBaseContext(), MainActivity.class);
-                    //intent.putParcelableArrayListExtra("MOVIES", array);
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                    SharedPreferences.Editor editor = preferences.edit();
-                    Gson gson = new Gson();
-                    String json = gson.toJson(array);
-                    editor.putString("movies", json);
-                    editor.apply();     // This line is IMPORTANT !!
-                    //getActivity().startActivity(intent);
+
+                    saveData(array);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -136,8 +136,22 @@ public class OverviewFragment extends Fragment{
         AppController.getmInstance().addToRequestQueue(request);
     }
 
+    public void saveData(ArrayList<Movie> movies){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(movies);
+        editor.putString("movies", json);
+        editor.apply();     // This line is IMPORTANT !!
+    }
 
-
+    public ArrayList<Movie> loadData(String key){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        Gson gson = new Gson();
+        String json = prefs.getString(key, null);
+        Type type = new TypeToken<ArrayList<Movie>>() {}.getType();
+        return gson.fromJson(json, type);
+    }
 
 
     public interface OnItemSelectedListener {

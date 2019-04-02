@@ -39,7 +39,7 @@ public class Movie implements Parcelable {
         description = in.readString();
         duration = in.readInt();
         genres = in.createStringArrayList();
-        inMyList = in.readByte()!= 0;
+        inMyList = in.readInt() == 1;
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -114,7 +114,7 @@ public class Movie implements Parcelable {
         return inMyList;
     }
 
-    public void setInMylist(boolean id){
+    public void setInMylist(boolean inMyList){
         this.inMyList = inMyList;
     }
 
@@ -133,6 +133,6 @@ public class Movie implements Parcelable {
         dest.writeString(description);
         dest.writeInt(duration);
         dest.writeList(genres);
-        dest.writeByte((byte) (inMyList ? 1 : 0));
+        dest.writeInt(inMyList ? 1 : 0);
     }
 }

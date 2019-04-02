@@ -27,41 +27,41 @@
     <session id="-1843825850">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="8" />
+          <entry key="class" value="10" />
           <entry key="gradle" value="7" />
-          <entry key="java" value="80" />
-          <entry key="xml" value="37" />
+          <entry key="java" value="91" />
+          <entry key="xml" value="44" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="8" />
+          <entry key="CLASS" value="10" />
           <entry key="Groovy" value="7" />
-          <entry key="JAVA" value="80" />
-          <entry key="XML" value="37" />
+          <entry key="JAVA" value="91" />
+          <entry key="XML" value="44" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="21" />
-          <entry key="java" value="10073" />
-          <entry key="xml" value="885" />
+          <entry key="java" value="11189" />
+          <entry key="xml" value="955" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="21" />
-          <entry key="JAVA" value="10073" />
-          <entry key="XML" value="885" />
+          <entry key="JAVA" value="11189" />
+          <entry key="XML" value="955" />
         </counts>
       </usages-collector>
     </session>
@@ -71,49 +71,40 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/OverviewFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="103" column="45" selection-start-line="103" selection-start-column="45" selection-end-line="103" selection-end-column="45" />
-              <folding>
-                <element signature="e#2611#3716#0" expanded="true" />
-                <element signature="e#3715#3716#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ImageAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="53" column="9" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#591#592#0" expanded="true" />
-                <element signature="e#631#632#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-221">
+              <caret line="69" selection-start-line="69" selection-end-line="69" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MovieAdapter.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ImageAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="108" column="21" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
+            <state relative-caret-position="-43">
+              <caret line="67" column="39" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3355#3903#0" expanded="true" />
-                <element signature="e#3902#3903#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/view/View.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/listview_activity.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="6604" selection-start-line="6604" selection-end-line="6604" />
+            <state relative-caret-position="17">
+              <caret line="1" selection-start-line="1" selection-end-line="6" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mylist_fragment.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -121,33 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MylistFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="73" column="43" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/Movie.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="113" selection-start-line="113" selection-end-line="113" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2542#2543#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="281">
+              <caret line="75" column="59" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -190,26 +156,25 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/listview_activity.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/Movie.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/Profile.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/DetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ProfileFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/profile_fragment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/mylist_fragment.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MylistFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ImageAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/Movie.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/OverviewFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MovieAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MylistFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ImageAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/mylist_fragment.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="1045" />
+    <option name="width" value="888" />
+    <option name="height" value="1103" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -237,6 +202,17 @@
             </path>
             <path>
               <item name="Android-Bios-App" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="Android-Bios-App" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="Android-Bios-App" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
@@ -244,8 +220,8 @@
         </subPane>
       </pane>
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -365,17 +341,17 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49788135" visible="true" weight="0.3375839" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49788135" visible="true" weight="0.347651" />
       <window_info id="Structure" order="2" sideWeight="0.50211865" side_tool="true" weight="0.3295302" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
-      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.49597314" weight="0.34042552" />
-      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49731544" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Run" order="0" sideWeight="0.49597314" visible="true" weight="0.34042552" />
+      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49731544" weight="0.5134752" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.4986577" weight="0.32907802" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.79395974" visible="true" weight="0.38723403" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.79395974" weight="0.38723403" />
       <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.49932885" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.20604026" side_tool="true" weight="0.38723403" />
       <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
@@ -450,11 +426,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#384#385#0" expanded="true" />
-            <element signature="e#427#428#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -462,9 +433,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="354">
           <caret line="52" column="41" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -578,26 +546,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="41" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ProfileFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/listview_activity.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="52" column="40" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -606,21 +558,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mylist_fragment.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/750887c6ea1a4787138cbd9aac1cf266/jars/classes.jar!/android/support/v4/app/FragmentManagerImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2939">
-          <caret line="1598" selection-start-line="1598" selection-end-line="1598" />
         </state>
       </provider>
     </entry>
@@ -677,38 +614,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
           <caret line="117" selection-start-line="117" selection-end-line="117" />
-          <folding>
-            <element signature="e#4006#4007#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/750887c6ea1a4787138cbd9aac1cf266/jars/classes.jar!/android/support/v4/app/Fragment.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="319" selection-start-line="319" selection-end-line="319" />
-          <folding>
-            <element signature="e#9536#9537#0" expanded="true" />
-            <element signature="e#9574#9575#0" expanded="true" />
-            <element signature="e#11211#11212#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="73" column="43" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MylistFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
         </state>
       </provider>
     </entry>
@@ -719,55 +624,109 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/Movie.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/750887c6ea1a4787138cbd9aac1cf266/jars/classes.jar!/android/support/v4/app/FragmentManagerImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="113" selection-start-line="113" selection-end-line="113" />
+        <state relative-caret-position="118">
+          <caret line="812" selection-start-line="812" selection-end-line="812" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/750887c6ea1a4787138cbd9aac1cf266/jars/classes.jar!/android/support/v4/app/Fragment.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="1141" selection-start-line="1141" selection-end-line="1141" />
+          <folding>
+            <element signature="e#11137#11138#0" expanded="true" />
+            <element signature="e#11211#11212#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="73" column="43" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2542#2543#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="6604" selection-start-line="6604" selection-end-line="6604" />
+        <state relative-caret-position="251">
+          <caret line="6590" column="39" lean-forward="true" selection-start-line="6590" selection-start-column="39" selection-end-line="6590" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ImageAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="53" column="9" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
+        <state relative-caret-position="153">
+          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/Movie.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="135" column="30" selection-start-line="135" selection-start-column="30" selection-end-line="135" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#591#592#0" expanded="true" />
-            <element signature="e#631#632#0" expanded="true" />
+            <element signature="e#2511#2512#0" expanded="true" />
+            <element signature="e#2542#2543#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/OverviewFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="103" column="45" selection-start-line="103" selection-start-column="45" selection-end-line="103" selection-end-column="45" />
-          <folding>
-            <element signature="e#2611#3716#0" expanded="true" />
-            <element signature="e#3715#3716#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-221">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MovieAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="108" column="21" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
+        <state relative-caret-position="144">
+          <caret line="100" column="12" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3355#3903#0" expanded="true" />
-            <element signature="e#3902#3903#0" expanded="true" />
+            <element signature="e#3299#3837#0" expanded="true" />
+            <element signature="e#3836#3837#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/listview_activity.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MylistFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="75" column="59" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mylist_fragment.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ImageAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-43">
+          <caret line="67" column="39" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
