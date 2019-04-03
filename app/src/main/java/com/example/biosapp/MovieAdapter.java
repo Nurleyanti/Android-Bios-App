@@ -90,7 +90,7 @@ public class MovieAdapter extends BaseAdapter {
                 .execute(movie.getPicture());
         //imageView.setImageBitmap(movie.getPicture());
         title.setText(movie.getTitle());
-        desc.setText(movie.getDescription().substring(0, 90)+"...");
+        desc.setText(movie.getDescription().substring(0, 55)+"...");
         rating.setRating(movie.getRating());
 
 

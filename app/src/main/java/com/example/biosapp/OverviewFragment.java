@@ -35,7 +35,7 @@ import java.util.List;
 
 public class OverviewFragment extends Fragment{
 
-    private static final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=b6df984eba8e46d43326f404be37161a&language=en-US&page=1";
+    private static final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=b6df984eba8e46d43326f404be37161a&language=nl-NL&page=1";
 
     private ProgressDialog dialog;
     private ListView listView;
@@ -65,7 +65,6 @@ public class OverviewFragment extends Fragment{
         }else{
             array = loadData("moviess");
         }
-
 
 
         listView = view.findViewById(R.id.list);
