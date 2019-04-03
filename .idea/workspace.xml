@@ -27,40 +27,40 @@
     <session id="-1843825850">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.6" value="2" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.6" value="3" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="10" />
           <entry key="gradle" value="7" />
-          <entry key="java" value="91" />
-          <entry key="xml" value="44" />
+          <entry key="java" value="95" />
+          <entry key="xml" value="46" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="10" />
           <entry key="Groovy" value="7" />
-          <entry key="JAVA" value="91" />
-          <entry key="XML" value="44" />
+          <entry key="JAVA" value="95" />
+          <entry key="XML" value="46" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="21" />
-          <entry key="java" value="11189" />
+          <entry key="java" value="11191" />
           <entry key="xml" value="955" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="21" />
-          <entry key="JAVA" value="11189" />
+          <entry key="JAVA" value="11191" />
           <entry key="XML" value="955" />
         </counts>
       </usages-collector>
@@ -71,17 +71,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/OverviewFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-221">
+            <state relative-caret-position="646">
               <caret line="69" selection-start-line="69" selection-end-line="69" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ImageAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-43">
+            <state relative-caret-position="25">
               <caret line="67" column="39" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MovieAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="314">
+              <caret line="122" column="77" selection-start-line="122" selection-start-column="77" selection-end-line="122" selection-end-column="77" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -103,8 +115,8 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mylist_fragment.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+            <state relative-caret-position="289">
+              <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -112,7 +124,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MylistFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
+            <state relative-caret-position="748">
               <caret line="75" column="59" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
             </state>
           </provider>
@@ -164,17 +176,17 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/Movie.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/OverviewFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MovieAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MylistFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ImageAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/mylist_fragment.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MovieAdapter.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1045" />
-    <option name="width" value="888" />
-    <option name="height" value="1103" />
+    <option name="width" value="889" />
+    <option name="height" value="1104" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -182,6 +194,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -221,7 +234,6 @@
       </pane>
       <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,23 +353,23 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49788135" visible="true" weight="0.347651" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49788135" visible="true" weight="0.347651" />
       <window_info id="Structure" order="2" sideWeight="0.50211865" side_tool="true" weight="0.3295302" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="0" sideWeight="0.49597314" visible="true" weight="0.34042552" />
+      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.49597314" weight="0.34042552" />
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49731544" weight="0.5134752" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.4986577" weight="0.32907802" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.79395974" weight="0.38723403" />
       <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.49932885" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.20604026" side_tool="true" weight="0.38723403" />
       <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49798658" weight="0.33049646" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49798658" visible="true" weight="0.33049646" />
       <window_info anchor="bottom" id="Find" order="8" />
-      <window_info anchor="bottom" id="Android Profiler" order="9" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" show_stripe_button="false" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -413,12 +425,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ApiConnector.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/detail_fragment.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/DetailFragment.java" />
@@ -528,14 +540,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
-          <folding>
-            <element signature="e#984#985#0" expanded="true" />
-            <element signature="e#1020#1021#0" expanded="true" />
-            <element signature="e#1172#1173#0" expanded="true" />
-            <element signature="e#1214#1215#0" expanded="true" />
-            <element signature="e#1341#1342#0" expanded="true" />
-            <element signature="e#1382#1383#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -635,10 +639,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="1141" selection-start-line="1141" selection-end-line="1141" />
-          <folding>
-            <element signature="e#11137#11138#0" expanded="true" />
-            <element signature="e#11211#11212#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -681,20 +681,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/OverviewFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
+        <state relative-caret-position="646">
           <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MovieAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="100" column="12" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3299#3837#0" expanded="true" />
-            <element signature="e#3836#3837#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -706,25 +694,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MylistFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="75" column="59" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mylist_fragment.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+        <state relative-caret-position="289">
+          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MylistFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="75" column="59" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/ImageAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-43">
+        <state relative-caret-position="25">
           <caret line="67" column="39" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/biosapp/MovieAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="122" column="77" selection-start-line="122" selection-start-column="77" selection-end-line="122" selection-end-column="77" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -108,7 +108,8 @@ public class MovieAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if(movie.getInMylist() == true){
                     message =  "Verwijderd uit Mijn Lijst";
-                    v.setBackgroundResource(R.drawable.ic_remove_black_24dp);
+                    v.setBackgroundResource(R.drawable.ic_add_black_24dp);
+
                     for(int i = 0; i < movies.size(); i++){
                         if (movies.get(i).id == movie.id){
                             movies.get(i).setInMylist(false);
@@ -119,7 +120,7 @@ public class MovieAdapter extends BaseAdapter {
 
                 }else{
                     message =  "Toegevoegd aan Mijn Lijst";
-                    v.setBackgroundResource(R.drawable.ic_add_black_24dp);
+                    v.setBackgroundResource(R.drawable.ic_remove_black_24dp);
                     for(int i = 0; i < movies.size(); i++){
                         if (movies.get(i).id == movie.id){
                             movies.get(i).setInMylist(true);
