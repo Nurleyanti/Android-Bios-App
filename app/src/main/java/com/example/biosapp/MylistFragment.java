@@ -1,6 +1,7 @@
 package com.example.biosapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -38,7 +40,7 @@ public class MylistFragment extends Fragment{
     private static final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=b6df984eba8e46d43326f404be37161a&language=en-US&page=1";
     private ProgressDialog dialog;
     private List<Movie> array = new ArrayList<Movie>();
-    private ListView imageGrid;
+    private GridView imageGrid;
     private ArrayList<Bitmap> bitmapList;
     private ArrayList<Movie> urlList;
 
@@ -52,40 +54,31 @@ public class MylistFragment extends Fragment{
 
         View view = inflater.inflate(R.layout.mylist_fragment, container, false);
 
-//        Bundle bundle = getArguments();
-//        List<Movie> movies = bundle.getParcelableArrayList("MOVIES");
-        imageGrid = view.findViewById(R.id.linear);
-        array = getArrayList("moviess");
+        imageGrid = view.findViewById(R.id.gridView);
+        array = getArrayList("movies");
 
         this.urlList = new ArrayList<Movie>();
 
-//            for(int i = 0; i < array.size(); i++) {
-//                if(array.get(i).getInMylist() == true){
-//                    this.urlList.add(array.get(i).getPicture());
-//                }
-//
-//            }
         for(int i = 0; i < array.size(); i++) {
             if(array.get(i).getInMylist() == true){
                 this.urlList.add(array.get(i));
             }
 
         }
+        imageGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                //Create intent
+                Intent i = new Intent(getContext(), DetailActivity.class);
+                i.putExtra("MOVIE!", urlList.get(position));
+                startActivity(i);
 
-
+            }
+        });
         imageGrid.setAdapter(new ImageAdapter(view.getContext(), urlList));
 
         return view;
     }
 
-    private Bitmap urlImageToBitmap(String imageUrl) throws Exception {
-        Bitmap result = null;
-        URL url = new URL(imageUrl);
-        if(url != null) {
-            result = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        }
-        return result;
-    }
 
     public ArrayList<Movie> getArrayList(String key){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());

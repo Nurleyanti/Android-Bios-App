@@ -35,18 +35,18 @@ import java.util.List;
 
 public class OverviewFragment extends Fragment{
 
-    private static final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=b6df984eba8e46d43326f404be37161a&language=en-US&page=1";
-
+    private static final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=b6df984eba8e46d43326f404be37161a&language=en-EN&page=1";
+    private static final String detailurl = "https://api.themoviedb.org/3/movie/";
+    private static final String api = "?api_key=b6df984eba8e46d43326f404be37161a";
     private ProgressDialog dialog;
     private ListView listView;
-    private ArrayList<Movie> array = new ArrayList<Movie>();
+    private ArrayList<Movie> array = new ArrayList<Movie>();;
     private MovieAdapter adapter;
     private static final String TAG = MainActivity.class.getSimpleName();
 
 
     private String newUrl;
     Movie movie;
-    Profile profile;
     Movie extraMovie;
 
 
@@ -56,16 +56,13 @@ public class OverviewFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.overview_fragment, container, false);
-            profile = new Profile();
-//            if(profile.getMyMovies() == null){
-//                doJsonRequest();
-//            }
-        if(loadData("moviess") == null){
+
+        if(loadData("movies") == null){
             doJsonRequest();
         }else{
-            array = loadData("moviess");
+            array = loadData("movies");
         }
-
+       // doJsonRequest();
 
 
         listView = view.findViewById(R.id.list);
@@ -74,15 +71,14 @@ public class OverviewFragment extends Fragment{
 
 
         //pass movie data to detail activity
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent i = new Intent(view.getContext(), DetailActivity.class);
-//                i.putExtra("MOVIE!", array.get(position));
-//
-//                startActivity(i);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(view.getContext(), DetailActivity.class);
+                i.putExtra("MOVIE!", array.get(position));
+                startActivity(i);
+            }
+        });
 
 
         return view;
@@ -108,17 +104,14 @@ public class OverviewFragment extends Fragment{
                         movie.setTitle(obj.getString("title"));
                         movie.setDescription(obj.getString("overview"));
                         movie.setPicture( "http://image.tmdb.org/t/p/w185/" +obj.getString("poster_path"));
-                        //movie.inMyList = true;
                         movie.setRating( (float) obj.getDouble("vote_average")/2);
 
                         array.add(movie);
 
-                        //getActivity().startActivity(intent);
 
 
                         Log.d("FILM", movie.getTitle());
                     }
-                    profile.setNewMovies( array);
 
                     saveData(array);
                 } catch (JSONException e) {
@@ -135,6 +128,7 @@ public class OverviewFragment extends Fragment{
         });
         AppController.getmInstance().addToRequestQueue(request);
     }
+
 
     public void saveData(ArrayList<Movie> movies){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());

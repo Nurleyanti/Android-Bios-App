@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +46,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OverviewFragment.OnItemSelectedListener {
     private static final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=b6df984eba8e46d43326f404be37161a&language=en-US&page=1";
+    private static final int SELECT_IMAGE = 1000;
     private ProgressDialog dialog;
     private List<Movie> array = new ArrayList<Movie>();
     private ListView listView;
@@ -94,6 +97,8 @@ getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
             dialog = null;
         }
     }
+
+
 
 
 
