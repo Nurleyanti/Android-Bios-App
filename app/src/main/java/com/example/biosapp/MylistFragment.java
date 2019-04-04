@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -41,10 +42,24 @@ public class MylistFragment extends Fragment{
     private ProgressDialog dialog;
     private List<Movie> array = new ArrayList<Movie>();
     private GridView imageGrid;
-    private ArrayList<Bitmap> bitmapList;
     private ArrayList<Movie> urlList;
+    View view;
+    ImageAdapter imageAdapter;
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        array = getArrayList("movies");
+        urlList = new ArrayList<Movie>();
+        for(int i = 0; i < array.size(); i++) {
+            if (array.get(i).getInMylist() == true) {
+                urlList.add(array.get(i));
+            }
+        }
+        imageAdapter = new ImageAdapter(view.getContext(), urlList);
+        imageAdapter.notifyDataSetChanged();
+        imageGrid.setAdapter(imageAdapter);
+    }
 
     @Nullable
     @Override
@@ -52,7 +67,7 @@ public class MylistFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
 
-        View view = inflater.inflate(R.layout.mylist_fragment, container, false);
+        view = inflater.inflate(R.layout.mylist_fragment, container, false);
 
         imageGrid = view.findViewById(R.id.gridView);
         array = getArrayList("movies");
@@ -65,6 +80,8 @@ public class MylistFragment extends Fragment{
             }
 
         }
+        imageAdapter = new ImageAdapter(view.getContext(), urlList);
+        imageGrid.setAdapter(imageAdapter);
         imageGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 //Create intent
@@ -74,7 +91,7 @@ public class MylistFragment extends Fragment{
 
             }
         });
-        imageGrid.setAdapter(new ImageAdapter(view.getContext(), urlList));
+
 
         return view;
     }

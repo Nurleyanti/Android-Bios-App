@@ -50,6 +50,7 @@ public class MovieAdapter extends BaseAdapter {
     }
 
 
+
     @Override
     public int getCount() {
         return movies.size();
@@ -117,6 +118,7 @@ public class MovieAdapter extends BaseAdapter {
                     saveData((ArrayList)movies);
                     movies = loadData();
 
+
                 }else{
                     message =  "Added to my list";
                     v.setBackgroundResource(R.drawable.ic_remove_black_24dp);
@@ -131,7 +133,7 @@ public class MovieAdapter extends BaseAdapter {
 
                 }
 //                    saveData((ArrayList)movies);
-                    movies = loadData();
+                    //movies = loadData();
                 //!movie.getInMylist() = movie.getInMylist();
                 toastMsg(message);
             }
@@ -140,21 +142,6 @@ public class MovieAdapter extends BaseAdapter {
         //}
         return convertView;
 
-    }
-
-    public static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            // Log exception
-            return null;
-        }
     }
 
     public void toastMsg(String msg) {

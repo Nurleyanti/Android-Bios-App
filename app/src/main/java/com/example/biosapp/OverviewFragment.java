@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -40,7 +41,7 @@ public class OverviewFragment extends Fragment{
     private static final String api = "?api_key=b6df984eba8e46d43326f404be37161a";
     private ProgressDialog dialog;
     private ListView listView;
-    private ArrayList<Movie> array = new ArrayList<Movie>();;
+    private ArrayList<Movie> array = new ArrayList<Movie>();
     private MovieAdapter adapter;
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -49,6 +50,19 @@ public class OverviewFragment extends Fragment{
     Movie movie;
     Movie extraMovie;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+//        if(loadData("movies") == null){
+//            doJsonRequest();
+//        }else{
+//            array = loadData("movies");
+//        }
+        array = loadData("movies");
+        adapter = new MovieAdapter(listView.getContext(), array);
+        adapter.notifyDataSetChanged();
+        listView.setAdapter(adapter);
+    }
 
 
     @Nullable
@@ -89,10 +103,12 @@ public class OverviewFragment extends Fragment{
         dialog.setMessage("Loading...");
         dialog.show();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                hideDialog();
+
+
+
                 try {
 
                     JSONArray jsonArray = response.getJSONArray("results");
@@ -105,14 +121,10 @@ public class OverviewFragment extends Fragment{
                         movie.setDescription(obj.getString("overview"));
                         movie.setPicture( "http://image.tmdb.org/t/p/w185/" +obj.getString("poster_path"));
                         movie.setRating( (float) obj.getDouble("vote_average")/2);
-
                         array.add(movie);
-
-
-
+                        hideDialog();
                         Log.d("FILM", movie.getTitle());
                     }
-
                     saveData(array);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -126,6 +138,10 @@ public class OverviewFragment extends Fragment{
                 error.printStackTrace();
             }
         });
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppController.getmInstance().addToRequestQueue(request);
     }
 
@@ -152,33 +168,6 @@ public class OverviewFragment extends Fragment{
         void onItemSelected(Movie item);
     }
 
-    private OnItemSelectedListener listener;
-
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        if (getActivity() instanceof OnItemSelectedListener) {
-//            listener = (OnItemSelectedListener) getActivity();
-//            AdapterView.OnItemClickListener mItemClickedHandler = new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView parent, View view, int position, long id) {
-//                    listener.onItemSelected(movieArray[position]);
-//                }
-//            };
-//            listView.setOnItemClickListener(mItemClickedHandler);
-//        }
-//
-//
-//    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (getActivity() instanceof OnItemSelectedListener) {
-            listener = (OnItemSelectedListener) getActivity();
-        }
-
-    }
 
     @Override
     public void onDestroy() {

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/android_list_view_tutorial_with_example"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_centerHorizontal="true">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -63,8 +68,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:gravity="right"
+            android:orientation="vertical"
+            android:layout_marginRight="3dp">
 
         <Button
             android:id="@+id/seen_button"
@@ -76,7 +82,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="right"
             android:orientation="vertical">
 
         <Button
@@ -132,6 +138,8 @@
         android:layout_below="@id/detail_date"
         android:background="#A9A9A9" />
 
+
+
     <TextView
         android:id="@+id/detail_overview"
         android:layout_width="match_parent"
@@ -145,3 +153,4 @@
 
 
 </RelativeLayout>
+    </ScrollView>

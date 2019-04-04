@@ -22,7 +22,6 @@ import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
     private Context context;
-    //private ArrayList<Bitmap> bitmapList;
     private ArrayList<Movie> urlList;
 
     public ImageAdapter(Context context, ArrayList<Movie> urlList) {

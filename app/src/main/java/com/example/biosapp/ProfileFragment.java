@@ -38,6 +38,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.ExpandableHeightGridView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -58,27 +59,49 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     ImageView image;
     TextView name;
     TextView desc;
-    EditText editName;
-    Button editButton;
+
     static final int SELECT_IMAGE = 1000;
     Bitmap bitmap;
-    private GridView gridView;
-    private GridViewAdapter gridAdapter;
-    ImageView gridImage;
+    private ExpandableHeightGridView gridView;
     List<Movie> movies;
     ArrayList<Movie>seenMovies;
+    GridViewAdapter gridAdapter;
+    View view;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        movies = loadMovies();
+        seenMovies = new ArrayList<Movie>();
+        for(int i = 0; i < movies.size(); i++) {
+            if(movies.get(i).getSeen()){
+                seenMovies.add(movies.get(i));
+            }
+
+        }
+        if(seenMovies.size() <4){
+            desc.setText("Movie Noob");
+        }else if(seenMovies.size() > 3 && seenMovies.size() < 10){
+            desc.setText("Movie Novice");
+        }else if(seenMovies.size() > 10){
+            desc.setText("Movie Master");
+        }
+        gridAdapter = new GridViewAdapter(view.getContext(), seenMovies);
+        gridAdapter.notifyDataSetChanged();
+        gridView.setAdapter(gridAdapter);
+        gridView.setExpanded(true);
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        View view = inflater.inflate(R.layout.profile_fragment, container, false);
+        view = inflater.inflate(R.layout.profile_fragment, container, false);
 
         btnSelectImage = view.findViewById(R.id.profile_button);
         image = view.findViewById(R.id.profile_image);
         gridView = view.findViewById(R.id.gridView);
+        gridView.setExpanded(true);
         desc = view.findViewById(R.id.profile_description);
         movies = loadMovies();
 
@@ -90,8 +113,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
 
         }
-
-        gridView.setAdapter(new GridViewAdapter(this.getContext(), seenMovies));
+        gridAdapter = new GridViewAdapter(getContext(), seenMovies);
+        gridView.setAdapter(gridAdapter);
         if(loadData() != null){
             byte[] imageAsBytes = Base64.decode(loadData().getBytes(), Base64.DEFAULT);
             image.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
@@ -122,18 +145,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
         return view;
     }
-    public void displayEditText(View view, EditText editText, TextView name) {
-        if (name.getText().toString().equals("")) {
-            String editTextValue =   editText.getText().toString();
-            editText.setText(editTextValue);
-        } else {
-            editText.setText("");
-            name.setText("");
-        }
-
-    }
-
-
 
     public ArrayList<Movie> loadMovies(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());

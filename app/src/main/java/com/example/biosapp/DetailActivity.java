@@ -49,6 +49,9 @@ public class DetailActivity extends AppCompatActivity {
     private RatingBar _rating;
     private Button _seen;
     private Button _inMyList;
+    ImageAdapter imageAdapter;
+    MovieAdapter movieAdapter;
+    GridViewAdapter gridViewAdapter;
     Movie movie;
     List<Movie> movies;
 
@@ -159,6 +162,7 @@ public class DetailActivity extends AppCompatActivity {
                             movies.get(i).setSeen(true);
                         }
                     }
+
                     saveData((ArrayList)movies);
                 }else{
                     toastMsg("Movie removed from profile");
@@ -199,11 +203,16 @@ public class DetailActivity extends AppCompatActivity {
                     }
                     saveData((ArrayList)movies);
                 }
+
             }
         });
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     public void toastMsg(String msg) {
 
