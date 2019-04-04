@@ -16,11 +16,12 @@ public class Movie implements Parcelable {
     public int duration;
     public ArrayList<String> genres;
     public boolean inMyList = false;
+    public boolean seen = false;
 
     public Movie() {
     }
 
-    public Movie(int id, String title, String picture, float rating, String description, int duration, ArrayList<String> genres, boolean inMyList){
+    public Movie(int id, String title, String picture, float rating, String description, int duration, ArrayList<String> genres, boolean inMyList, boolean seen){
         this.id = id;
      this.title = title;
      this.picture = picture;
@@ -29,6 +30,7 @@ public class Movie implements Parcelable {
      this.duration = duration;
      this.genres = genres;
      this.inMyList = inMyList;
+     this.seen = seen;
     }
 
     protected Movie(Parcel in) {
@@ -40,6 +42,7 @@ public class Movie implements Parcelable {
         duration = in.readInt();
         genres = in.createStringArrayList();
         inMyList = in.readInt() == 1;
+        seen = in.readInt() == 1;
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -98,7 +101,7 @@ public class Movie implements Parcelable {
         return duration;
     }
 
-    public void setDuration(int id){
+    public void setDuration(int duration){
         this.duration = duration;
     }
 
@@ -112,6 +115,14 @@ public class Movie implements Parcelable {
 
     public boolean getInMylist(){
         return inMyList;
+    }
+
+    public void setSeen(boolean seen){
+        this.seen = seen;
+    }
+
+    public boolean getSeen(){
+        return seen;
     }
 
     public void setInMylist(boolean inMyList){
@@ -134,5 +145,6 @@ public class Movie implements Parcelable {
         dest.writeInt(duration);
         dest.writeList(genres);
         dest.writeInt(inMyList ? 1 : 0);
+        dest.writeInt(seen ? 1 : 0);
     }
 }

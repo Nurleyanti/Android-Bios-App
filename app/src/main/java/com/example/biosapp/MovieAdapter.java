@@ -25,9 +25,13 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +43,6 @@ public class MovieAdapter extends BaseAdapter {
     String message;
     Button button;
     ImageLoader imageLoader = AppController.getmInstance().getmImageLoader();
-
-//    public MovieAdapter(Activity activity, List<Movie> movies){
-//        this.activity = activity;
-//        this.movies = movies;
-//    }
 
     public MovieAdapter(@NonNull Context context, List<Movie> movies) {
         this.context = context;
@@ -86,15 +85,15 @@ public class MovieAdapter extends BaseAdapter {
         button = convertView.findViewById(R.id.bt);
 
         final Movie movie = movies.get(position);
-        new MainActivity.DownloadImageFromInternet((ImageView) convertView.findViewById(R.id.listview_image))
-                .execute(movie.getPicture());
-        //imageView.setImageBitmap(movie.getPicture());
+        Picasso.get().load(movie.getPicture()).into(imageView);
+
         title.setText(movie.getTitle());
-        desc.setText(movie.getDescription().substring(0, 55)+"...");
+        String description = movie.getDescription().substring(0, movie.getDescription().length()/4);
+        desc.setText(description + "...");
         rating.setRating(movie.getRating());
 
 
-        if(movie.getInMylist() == false){
+        if(!movie.getInMylist()){
             button.setBackgroundResource(R.drawable.ic_add_black_24dp);
 
         }else{
@@ -106,8 +105,8 @@ public class MovieAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                if(movie.getInMylist() == true){
-                    message =  "Verwijderd uit Mijn Lijst";
+                if(movie.getInMylist()){
+                    message =  "Removed from my list";
                     v.setBackgroundResource(R.drawable.ic_add_black_24dp);
 
                     for(int i = 0; i < movies.size(); i++){
@@ -119,7 +118,7 @@ public class MovieAdapter extends BaseAdapter {
                     movies = loadData();
 
                 }else{
-                    message =  "Toegevoegd aan Mijn Lijst";
+                    message =  "Added to my list";
                     v.setBackgroundResource(R.drawable.ic_remove_black_24dp);
                     for(int i = 0; i < movies.size(); i++){
                         if (movies.get(i).id == movie.id){
@@ -143,6 +142,21 @@ public class MovieAdapter extends BaseAdapter {
 
     }
 
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
+
     public void toastMsg(String msg) {
 
         Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
@@ -155,22 +169,14 @@ public class MovieAdapter extends BaseAdapter {
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(movies);
-        editor.putString("moviess", json);
+        editor.putString("movies", json);
         editor.apply();     // This line is IMPORTANT !!
     }
 
     public ArrayList<Movie> loadData(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         Gson gson = new Gson();
-        String json = prefs.getString("moviess", null);
-        Type type = new TypeToken<ArrayList<Movie>>() {}.getType();
-        return gson.fromJson(json, type);
-    }
-
-    public ArrayList<Movie> getArrayList(String key){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        Gson gson = new Gson();
-        String json = prefs.getString(key, null);
+        String json = prefs.getString("movies", null);
         Type type = new TypeToken<ArrayList<Movie>>() {}.getType();
         return gson.fromJson(json, type);
     }

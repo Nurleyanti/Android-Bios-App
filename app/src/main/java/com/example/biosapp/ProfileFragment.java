@@ -4,10 +4,12 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -27,9 +29,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -39,6 +46,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +56,17 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     Button btnSelectImage;
     ImageView image;
+    TextView name;
+    TextView desc;
+    EditText editName;
+    Button editButton;
     static final int SELECT_IMAGE = 1000;
     Bitmap bitmap;
+    private GridView gridView;
+    private GridViewAdapter gridAdapter;
+    ImageView gridImage;
+    List<Movie> movies;
+    ArrayList<Movie>seenMovies;
 
     @Nullable
     @Override
@@ -61,17 +78,70 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         btnSelectImage = view.findViewById(R.id.profile_button);
         image = view.findViewById(R.id.profile_image);
+        gridView = view.findViewById(R.id.gridView);
+        desc = view.findViewById(R.id.profile_description);
+        movies = loadMovies();
+
+        seenMovies = new ArrayList<Movie>();
+
+        for(int i = 0; i < movies.size(); i++) {
+            if(movies.get(i).getSeen()){
+                seenMovies.add(movies.get(i));
+            }
+
+        }
+
+        gridView.setAdapter(new GridViewAdapter(this.getContext(), seenMovies));
         if(loadData() != null){
             byte[] imageAsBytes = Base64.decode(loadData().getBytes(), Base64.DEFAULT);
             image.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
             //image.setImageBitmap(bitmap);
+        }else{
+            image.setImageResource(R.drawable.ic_launcher_foreground);
         }
         btnSelectImage.setOnClickListener(this);
 
         handlePermission();
+        name = view.findViewById(R.id.profile_name);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                //Create intent
+                Intent i = new Intent(getContext(), DetailActivity.class);
+                i.putExtra("MOVIE!", seenMovies.get(position));
+                startActivity(i);
+
+            }
+        });
+        if(seenMovies.size() <4){
+            desc.setText("Movie Noob");
+        }else if(seenMovies.size() > 3 && seenMovies.size() < 10){
+            desc.setText("Movie Novice");
+        }else if(seenMovies.size() > 10){
+            desc.setText("Movie Master");
+        }
         return view;
     }
+    public void displayEditText(View view, EditText editText, TextView name) {
+        if (name.getText().toString().equals("")) {
+            String editTextValue =   editText.getText().toString();
+            editText.setText(editTextValue);
+        } else {
+            editText.setText("");
+            name.setText("");
+        }
 
+    }
+
+
+
+    public ArrayList<Movie> loadMovies(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Gson gson = new Gson();
+        String json = prefs.getString("movies", null);
+        Type type = new TypeToken<ArrayList<Movie>>() {}.getType();
+        return gson.fromJson(json, type);
+    }
 
 
     void handlePermission(){
@@ -149,14 +219,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if(context == null){
             return;
         }
-        Intent i = new Intent();
-        i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        i.addCategory(Intent.CATEGORY_DEFAULT);
-        i.setData(Uri.parse("package" + getContext().getPackageName()));
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        startActivity(i);
+//        Intent i = new Intent();
+//        i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//        i.addCategory(Intent.CATEGORY_DEFAULT);
+//        i.setData(Uri.parse("package" + getContext().getPackageName()));
+//        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        //startActivity(i);
+        startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
     }
 
     void openImageChooser(){
@@ -233,5 +304,5 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
 
-
 }
+
