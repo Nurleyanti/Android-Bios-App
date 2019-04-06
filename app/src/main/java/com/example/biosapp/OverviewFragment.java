@@ -44,11 +44,7 @@ public class OverviewFragment extends Fragment{
     private ArrayList<Movie> array = new ArrayList<Movie>();
     private MovieAdapter adapter;
     private static final String TAG = MainActivity.class.getSimpleName();
-
-
-    private String newUrl;
     Movie movie;
-    Movie extraMovie;
 
     @Override
     public void onResume() {

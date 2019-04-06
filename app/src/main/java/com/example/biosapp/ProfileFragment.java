@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -23,6 +25,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.PermissionChecker;
 import android.util.Base64;
 import android.util.Log;
@@ -43,16 +46,20 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static android.support.v4.content.ContextCompat.getExternalFilesDirs;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     Button btnSelectImage;
@@ -61,12 +68,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     TextView desc;
 
     static final int SELECT_IMAGE = 1000;
+    static final int CAMERA = 2000;
     Bitmap bitmap;
     private ExpandableHeightGridView gridView;
     List<Movie> movies;
     ArrayList<Movie>seenMovies;
     GridViewAdapter gridAdapter;
     View view;
+    CharSequence options[];
+    ContentValues values;
 
     @Override
     public void onResume() {
@@ -103,6 +113,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         gridView = view.findViewById(R.id.gridView);
         gridView.setExpanded(true);
         desc = view.findViewById(R.id.profile_description);
+        values = new ContentValues();
         movies = loadMovies();
 
         seenMovies = new ArrayList<Movie>();
@@ -118,7 +129,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if(loadData() != null){
             byte[] imageAsBytes = Base64.decode(loadData().getBytes(), Base64.DEFAULT);
             image.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
-            //image.setImageBitmap(bitmap);
         }else{
             image.setImageResource(R.drawable.ic_launcher_foreground);
         }
@@ -162,16 +172,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             return;
         }
         if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     SELECT_IMAGE);
+        }
+        if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                    CAMERA);
         }
     }
 
     public void createPermissions(){
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             if(!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)){
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         SELECT_IMAGE);
+            }
+        }
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            if(!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)){
+                requestPermissions(new String[]{Manifest.permission.CAMERA},
+                        CAMERA);
             }
         }
 
@@ -180,22 +200,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.d("NURLEYANTI", "hoi");
         switch(requestCode){
 
             case SELECT_IMAGE:
-                Log.d("NURLEYANTI", "hoi2");
                 for(int i=0; i< permissions.length; i++){
-                    Log.d("NURLEYANTI", "hoi3");
                     String permission = permissions[i];
                     if(grantResults[i] == PackageManager.PERMISSION_DENIED){
-                        Log.d("NURLEYANTI", "hoi4");
                         boolean showRationale = ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission);
                         if(showRationale){
-                            Log.d("NURLEYANTI", "hoi5");
                             //show your own message
                         }else{
-                            Log.d("NURLEYANTI", "hoi6");
                             //User tapped never ask again
                             showSettingsAlert();
                         }
@@ -230,23 +244,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if(context == null){
             return;
         }
-//        Intent i = new Intent();
-//        i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-//        i.addCategory(Intent.CATEGORY_DEFAULT);
-//        i.setData(Uri.parse("package" + getContext().getPackageName()));
-//        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        //startActivity(i);
-        startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+        startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), SELECT_IMAGE);
     }
 
-    void openImageChooser(){
+
+    private void openImageChooser(){
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Image"), SELECT_IMAGE);
     }
+
+    private void openCamera(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA);
+    }
+
+
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
@@ -274,6 +288,21 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                                 }
                             });
                         }
+                    }else if(requestCode == CAMERA){
+
+                        image.post(new Runnable() {
+                            @Override
+                            public void run() {
+//                                Bitmap bitmapLocal = (Bitmap) data.getExtras().get("data");
+                                    Bitmap bitmap1 = (Bitmap) data.getExtras().get("data");
+                                    image.setImageBitmap(bitmap1);
+                                //imageView.setImageBitmap( thumbnail.extractThumbnail(help1,help1.getWidth(),help1.getHeight()));
+                                //Bitmap bitmapLocal = (Bitmap) data.getExtras().get("data");
+                                saveData(bitmap1);
+                                bitmap = bitmap1;
+                            }
+
+                        });
                     }
                 }
             }
@@ -302,16 +331,54 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        try {
-            if (ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, SELECT_IMAGE);
-            } else {
-                openImageChooser();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+//        try {
+//            if (ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, SELECT_IMAGE);
+//            } else {
+//                openImageChooser();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, SELECT_IMAGE);
         }
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA);
+        }
+        else{
+            showDialog();
+        }
+
     };
+
+    public void showDialog(){
+        options = new CharSequence[] {"Gallery", "Camera"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false);
+        builder.setTitle("Select your option:");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // the user clicked on options[which]
+                if(options[which] == "Gallery"){
+                    openImageChooser();
+                }
+                else if(options[which] == "Camera"){
+                    openCamera();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //the user clicked on Cancel
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
 
 
 
