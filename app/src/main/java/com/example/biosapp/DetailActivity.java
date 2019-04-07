@@ -207,7 +207,6 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-
     public void toastMsg(String msg) {
 
         Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);

@@ -42,7 +42,6 @@ public class MovieAdapter extends BaseAdapter {
     private List<Movie> movies;
     String message;
     Button button;
-    ImageLoader imageLoader = AppController.getmInstance().getmImageLoader();
 
     public MovieAdapter(@NonNull Context context, List<Movie> movies) {
         this.context = context;
@@ -76,8 +75,8 @@ public class MovieAdapter extends BaseAdapter {
         if(convertView == null){
             convertView = inflater.inflate(R.layout.listview_activity, null);
         }
-        //if(imageLoader == null){
-            imageLoader=AppController.getmInstance().getmImageLoader();
+
+
             ImageView imageView = (ImageView) convertView.findViewById(R.id.listview_image);
 
             TextView title = (TextView) convertView.findViewById((R.id.listview_item_title));
@@ -132,14 +131,11 @@ public class MovieAdapter extends BaseAdapter {
 
 
                 }
-//                    saveData((ArrayList)movies);
-                    //movies = loadData();
-                //!movie.getInMylist() = movie.getInMylist();
                 toastMsg(message);
             }
         });
 
-        //}
+
         return convertView;
 
     }
@@ -167,6 +163,7 @@ public class MovieAdapter extends BaseAdapter {
         Type type = new TypeToken<ArrayList<Movie>>() {}.getType();
         return gson.fromJson(json, type);
     }
+
 
 
 

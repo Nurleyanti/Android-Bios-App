@@ -49,23 +49,16 @@ public class OverviewFragment extends Fragment{
 
     @Override
     public void onResume() {
-
-//        if(loadData("movies") == null){
-//            doJsonRequest();
-//        }else{
-//            array = loadData("movies");
-//        }
         if(shouldExecuteOnResume){
             array = loadData("movies");
             adapter = new MovieAdapter(listView.getContext(), array);
             adapter.notifyDataSetChanged();
             listView.setAdapter(adapter);
-
+            super.onResume();
         } else{
             shouldExecuteOnResume = true;
         }
         super.onResume();
-
     }
 
 
