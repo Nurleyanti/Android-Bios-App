@@ -21,18 +21,19 @@ public class Movie implements Parcelable {
     public Movie() {
     }
 
-    public Movie(int id, String title, String picture, float rating, String description, int duration, ArrayList<String> genres, boolean inMyList, boolean seen){
+    public Movie(int id, String title, String picture, float rating, String description, int duration, ArrayList<String> genres, boolean inMyList, boolean seen) {
         this.id = id;
-     this.title = title;
-     this.picture = picture;
-     this.rating = rating;
-     this.description = description;
-     this.duration = duration;
-     this.genres = genres;
-     this.inMyList = inMyList;
-     this.seen = seen;
+        this.title = title;
+        this.picture = picture;
+        this.rating = rating;
+        this.description = description;
+        this.duration = duration;
+        this.genres = genres;
+        this.inMyList = inMyList;
+        this.seen = seen;
     }
 
+    //Movie object implements Parceable so we can pass the whole objectØ
     protected Movie(Parcel in) {
         id = in.readInt();
         title = in.readString();
@@ -57,75 +58,75 @@ public class Movie implements Parcelable {
         }
     };
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getPicture(){
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture){
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 
-    public float getRating(){
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(float rating){
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
-    public int getDuration(){
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration){
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public ArrayList<String> getGenres(){
+    public ArrayList<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<String> genres){
+    public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
     }
 
-    public boolean getInMylist(){
+    public boolean getInMylist() {
         return inMyList;
     }
 
-    public void setSeen(boolean seen){
+    public void setSeen(boolean seen) {
         this.seen = seen;
     }
 
-    public boolean getSeen(){
+    public boolean getSeen() {
         return seen;
     }
 
-    public void setInMylist(boolean inMyList){
+    public void setInMylist(boolean inMyList) {
         this.inMyList = inMyList;
     }
 

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
  <item
      android:id="@+id/nav_home"
      android:icon="@drawable/ic_movie_black_24dp"
-     android:title="Upcoming movies"/>
+     app:autoSizeTextType="uniform"
+     app:autoSizeMinTextSize="12sp"
+     app:autoSizeMaxTextSize="100sp"
+     app:autoSizeStepGranularity="2sp"
+     android:title="Movies"/>
 
     <item
         android:id="@+id/nav_list"

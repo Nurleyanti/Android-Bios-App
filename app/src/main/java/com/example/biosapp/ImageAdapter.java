@@ -1,38 +1,27 @@
 package com.example.biosapp;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
     private Context context;
-    //private ArrayList<Bitmap> bitmapList;
-    private ArrayList<Movie> urlList;
+    private ArrayList<Movie> movies;
 
-    public ImageAdapter(Context context, ArrayList<Movie> urlList) {
+    public ImageAdapter(Context context, ArrayList<Movie> movies) {
         this.context = context;
-        this.urlList = urlList;
+        this.movies = movies;
     }
 
     @Override
     public int getCount() {
-        return urlList.size();
+        return movies.size();
     }
 
     @Override
@@ -47,21 +36,19 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         ImageView imageView;
 
-        if(convertView == null){
+        if (convertView == null) {
             imageView = new ImageView(context);
-        }else{
+        } else {
             imageView = (ImageView) convertView;
         }
-
-        Picasso.get().load(urlList.get(position).getPicture())
-                .noFade().resize(200,300)
+        //use picasso to load internet image
+        Picasso.get().load(movies.get(position).getPicture())
+                .noFade().resize(200, 300)
                 .centerCrop()
                 .into(imageView);
 
         return imageView;
-
     }
 }
