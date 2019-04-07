@@ -134,7 +134,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
         btnSelectImage.setOnClickListener(this);
 
-        handlePermission();
+        //handlePermission();
         name = view.findViewById(R.id.profile_name);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -200,21 +200,22 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch(requestCode){
 
-            case SELECT_IMAGE:
-                for(int i=0; i< permissions.length; i++){
+
+            if (requestCode == SELECT_IMAGE || requestCode == CAMERA) {
+                for (int i = 0; i < permissions.length; i++) {
                     String permission = permissions[i];
-                    if(grantResults[i] == PackageManager.PERMISSION_DENIED){
+                    if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
                         boolean showRationale = ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission);
-                        if(showRationale){
+                        if (showRationale) {
                             //show your own message
-                        }else{
+                        } else {
                             //User tapped never ask again
                             showSettingsAlert();
                         }
                     }
                 }
+
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
@@ -288,7 +289,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                                 }
                             });
                         }
-                    }else if(requestCode == CAMERA){
+                    }if(requestCode == CAMERA){
 
                         image.post(new Runnable() {
                             @Override
@@ -341,10 +342,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 //            e.printStackTrace();
 //        }
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, SELECT_IMAGE);
-        }
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, SELECT_IMAGE);
         }
         else{
             showDialog();
@@ -365,8 +363,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 if(options[which] == "Gallery"){
                     openImageChooser();
                 }
-                else if(options[which] == "Camera"){
-                    openCamera();
+                if(options[which] == "Camera"){
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA);
+                    }else {
+                        openCamera();
+                    }
                 }
             }
         });

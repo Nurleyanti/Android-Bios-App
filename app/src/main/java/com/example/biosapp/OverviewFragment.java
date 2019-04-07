@@ -45,19 +45,27 @@ public class OverviewFragment extends Fragment{
     private MovieAdapter adapter;
     private static final String TAG = MainActivity.class.getSimpleName();
     Movie movie;
+    static boolean shouldExecuteOnResume;
 
     @Override
     public void onResume() {
-        super.onResume();
+
 //        if(loadData("movies") == null){
 //            doJsonRequest();
 //        }else{
 //            array = loadData("movies");
 //        }
-        array = loadData("movies");
-        adapter = new MovieAdapter(listView.getContext(), array);
-        adapter.notifyDataSetChanged();
-        listView.setAdapter(adapter);
+        if(shouldExecuteOnResume){
+            array = loadData("movies");
+            adapter = new MovieAdapter(listView.getContext(), array);
+            adapter.notifyDataSetChanged();
+            listView.setAdapter(adapter);
+
+        } else{
+            shouldExecuteOnResume = true;
+        }
+        super.onResume();
+
     }
 
 
@@ -65,6 +73,7 @@ public class OverviewFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        shouldExecuteOnResume = false;
         View view = inflater.inflate(R.layout.overview_fragment, container, false);
 
         if(loadData("movies") == null){
@@ -102,9 +111,6 @@ public class OverviewFragment extends Fragment{
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
-
-
                 try {
 
                     JSONArray jsonArray = response.getJSONArray("results");
@@ -118,9 +124,10 @@ public class OverviewFragment extends Fragment{
                         movie.setPicture( "http://image.tmdb.org/t/p/w185/" +obj.getString("poster_path"));
                         movie.setRating( (float) obj.getDouble("vote_average")/2);
                         array.add(movie);
-                        hideDialog();
+
                         Log.d("FILM", movie.getTitle());
                     }
+                    hideDialog();
                     saveData(array);
                 } catch (JSONException e) {
                     e.printStackTrace();

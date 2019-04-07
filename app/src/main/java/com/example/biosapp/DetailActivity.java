@@ -49,11 +49,9 @@ public class DetailActivity extends AppCompatActivity {
     private RatingBar _rating;
     private Button _seen;
     private Button _inMyList;
-    ImageAdapter imageAdapter;
-    MovieAdapter movieAdapter;
-    GridViewAdapter gridViewAdapter;
     Movie movie;
     List<Movie> movies;
+
 
 
 
@@ -82,7 +80,7 @@ public class DetailActivity extends AppCompatActivity {
         }
         String newUrl;
         newUrl = url +movie.id + api;
-        //doJsonRequest(newUrl);
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, newUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -209,10 +207,6 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 
     public void toastMsg(String msg) {
 
