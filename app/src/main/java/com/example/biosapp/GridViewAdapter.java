@@ -1,14 +1,10 @@
 package com.example.biosapp;
 
-import android.app.Activity;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -42,14 +38,14 @@ public class GridViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
 
-        if(convertView == null){
+        if (convertView == null) {
             imageView = new ImageView(context);
-        }else{
+        } else {
             imageView = (ImageView) convertView;
         }
-
+        //use picasso to load internet imageØ
         Picasso.get().load(data.get(position).getPicture())
-                .noFade().resize(200,300)
+                .noFade().resize(200, 300)
                 .centerCrop()
                 .into(imageView);
 

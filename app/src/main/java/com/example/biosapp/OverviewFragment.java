@@ -34,7 +34,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OverviewFragment extends Fragment{
+public class OverviewFragment extends Fragment {
 
     private static final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=b6df984eba8e46d43326f404be37161a&language=en-EN&page=1";
     private static final String detailurl = "https://api.themoviedb.org/3/movie/";
@@ -44,18 +44,19 @@ public class OverviewFragment extends Fragment{
     private ArrayList<Movie> array = new ArrayList<Movie>();
     private MovieAdapter adapter;
     private static final String TAG = MainActivity.class.getSimpleName();
-    Movie movie;
-    static boolean shouldExecuteOnResume;
+    private Movie movie;
+    private static boolean shouldExecuteOnResume;
 
+    //call when user presses back to update view
     @Override
     public void onResume() {
-        if(shouldExecuteOnResume){
+        if (shouldExecuteOnResume) {
             array = loadData("movies");
             adapter = new MovieAdapter(listView.getContext(), array);
             adapter.notifyDataSetChanged();
             listView.setAdapter(adapter);
             super.onResume();
-        } else{
+        } else {
             shouldExecuteOnResume = true;
         }
         super.onResume();
@@ -66,21 +67,20 @@ public class OverviewFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //is false cause onResume shouldn't be called when app is opened for first time
+        //the movies array will be empty
         shouldExecuteOnResume = false;
         View view = inflater.inflate(R.layout.overview_fragment, container, false);
+        listView = view.findViewById(R.id.list);
 
-        if(loadData("movies") == null){
+        //doJsonrequest if array is empty
+        if (loadData("movies") == null) {
             doJsonRequest();
-        }else{
+        } else {
             array = loadData("movies");
         }
-       // doJsonRequest();
-
-
-        listView = view.findViewById(R.id.list);
         adapter = new MovieAdapter(listView.getContext(), array);
         listView.setAdapter(adapter);
-
 
         //pass movie data to detail activity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,7 +96,8 @@ public class OverviewFragment extends Fragment{
         return view;
     }
 
-    public void doJsonRequest(){
+    //get movies from API and put in array
+    public void doJsonRequest() {
         dialog = new ProgressDialog(this.getContext());
         dialog.setMessage("Loading...");
         dialog.show();
@@ -108,14 +109,14 @@ public class OverviewFragment extends Fragment{
 
                     JSONArray jsonArray = response.getJSONArray("results");
 
-                    for(int i=0; i< jsonArray.length(); i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject obj = jsonArray.getJSONObject(i);
                         movie = new Movie();
                         movie.setId(obj.getInt("id"));
                         movie.setTitle(obj.getString("title"));
                         movie.setDescription(obj.getString("overview"));
-                        movie.setPicture( "http://image.tmdb.org/t/p/w185/" +obj.getString("poster_path"));
-                        movie.setRating( (float) obj.getDouble("vote_average")/2);
+                        movie.setPicture("http://image.tmdb.org/t/p/w185/" + obj.getString("poster_path"));
+                        movie.setRating((float) obj.getDouble("vote_average") / 2);
                         array.add(movie);
 
                         Log.d("FILM", movie.getTitle());
@@ -141,8 +142,8 @@ public class OverviewFragment extends Fragment{
         AppController.getmInstance().addToRequestQueue(request);
     }
 
-
-    public void saveData(ArrayList<Movie> movies){
+    //save array to SharedPreferences
+    public void saveData(ArrayList<Movie> movies) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
@@ -151,19 +152,15 @@ public class OverviewFragment extends Fragment{
         editor.apply();     // This line is IMPORTANT !!
     }
 
-    public ArrayList<Movie> loadData(String key){
+    //get array from SharedPreferences
+    public ArrayList<Movie> loadData(String key) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         Gson gson = new Gson();
         String json = prefs.getString(key, null);
-        Type type = new TypeToken<ArrayList<Movie>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Movie>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
-
-
-    public interface OnItemSelectedListener {
-        void onItemSelected(Movie item);
-    }
-
 
     @Override
     public void onDestroy() {
@@ -171,8 +168,8 @@ public class OverviewFragment extends Fragment{
         hideDialog();
     }
 
-    public void hideDialog(){
-        if(dialog != null){
+    public void hideDialog() {
+        if (dialog != null) {
             dialog.dismiss();
             dialog = null;
         }

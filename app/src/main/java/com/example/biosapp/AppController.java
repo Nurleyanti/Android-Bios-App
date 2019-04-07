@@ -20,36 +20,29 @@ public class AppController extends Application {
         mInstance = this;
     }
 
-    public static synchronized AppController getmInstance(){
+    public static synchronized AppController getmInstance() {
         return mInstance;
     }
 
-    public RequestQueue getmRequestQueue(){
-        if(mRequestQueue == null){
+    public RequestQueue getmRequestQueue() {
+        if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return mRequestQueue;
     }
 
-    public ImageLoader getmImageLoader(){
-        getmRequestQueue();
-        if(mImageLoader == null){
-            mImageLoader = new ImageLoader(this.mRequestQueue, new BitmapCache());
-        }
-        return this.mImageLoader;
-    }
-    public<T> void addToRequestQueue(Request<T> request, String tag){
-        request.setTag((TextUtils.isEmpty(tag) ? TAG :tag));
+    public <T> void addToRequestQueue(Request<T> request, String tag) {
+        request.setTag((TextUtils.isEmpty(tag) ? TAG : tag));
         getmRequestQueue().add(request);
     }
 
-    public<T> void addToRequestQueue(Request<T> request){
+    public <T> void addToRequestQueue(Request<T> request) {
         request.setTag(TAG);
         getmRequestQueue().add(request);
     }
 
-    public void cancelPendingRequest(Object tag){
-        if(mRequestQueue != null){
+    public void cancelPendingRequest(Object tag) {
+        if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
     }

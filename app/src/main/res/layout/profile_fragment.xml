@@ -78,7 +78,7 @@
         android:textStyle="bold"
          />
 
-    <com.example.ExpandableHeightGridView
+    <com.example.biosapp.ExpandableHeightGridView
         android:id="@+id/gridView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
